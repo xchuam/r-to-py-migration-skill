@@ -33,13 +33,17 @@ That distinction is core to the repo. The skill is designed to prevent silent se
 
 ### Codex / OpenAI agents
 
-Install directly from GitHub with the Codex skill installer:
+Option 1: install from chat with the Codex skill installer.
+
+Run this in the agent chat, not in your shell:
 
 ```text
 $skill-installer install https://github.com/xchuam/r-to-py-migration-skill/tree/main/skills/cran-to-native-python-migration
 ```
 
-You can also install it manually as a personal skill:
+Option 2: install manually from the shell as a personal skill.
+
+Run this in your shell, not in chat:
 
 ```bash
 mkdir -p ~/.agents/skills
@@ -50,25 +54,33 @@ Then restart Codex so the new skill is discovered.
 
 ### Claude
 
-For local Claude-compatible skill folders:
+Option 1: install locally with shell commands.
+
+Run this in your shell:
 
 ```bash
 mkdir -p ~/.claude/skills
 cp -R skills/cran-to-native-python-migration ~/.claude/skills/
 ```
 
-If you are using Claude's skill upload flow, zip the `cran-to-native-python-migration` folder and upload that folder as a skill.
+Option 2: use Claude's upload flow.
+
+Do this in the Claude UI, not in the shell:
+
+- zip the `skills/cran-to-native-python-migration` folder
+- upload that folder as a skill
+- then invoke the skill from the Claude chat
 
 ### GitHub Copilot / compatible agents
 
-For a repository-scoped skill:
+For a repository-scoped skill, run this in your shell:
 
 ```bash
 mkdir -p .github/skills
 cp -R skills/cran-to-native-python-migration .github/skills/
 ```
 
-For a personal installation:
+For a personal installation, run this in your shell:
 
 ```bash
 mkdir -p ~/.copilot/skills
@@ -77,9 +89,45 @@ cp -R skills/cran-to-native-python-migration ~/.copilot/skills/
 
 GitHub's agent-skill docs also recognize `.claude/skills` and `.agents/skills` as supported locations in some contexts, so this same folder can be reused across ecosystems.
 
+## Install The Required Companion Skill
+
+This migration skill should be used together with [`github/awesome-copilot/python-pypi-package-builder`](https://github.com/github/awesome-copilot/blob/main/skills/python-pypi-package-builder/SKILL.md) for Python package scaffolding, packaging metadata, and release-readiness work.
+
+### Codex / OpenAI agents
+
+Run this in the agent chat:
+
+```text
+$skill-installer install github/awesome-copilot/python-pypi-package-builder
+```
+
+### Manual install from GitHub
+
+Run this in your shell:
+
+```bash
+git clone https://github.com/github/awesome-copilot.git /tmp/awesome-copilot
+mkdir -p ~/.agents/skills
+cp -R /tmp/awesome-copilot/python-pypi-package-builder ~/.agents/skills/
+```
+
+After installation, invoke both skills together from chat:
+
+```text
+Use cran-to-native-python-migration and github/awesome-copilot/python-pypi-package-builder for this migration.
+```
+
 ## Use The Skill
 
-Once installed, ask the agent to use `cran-to-native-python-migration` when auditing or migrating a CRAN package.
+Once installed, invoke the skill from the agent chat.
+
+Type something like this in chat:
+
+```text
+Use cran-to-native-python-migration and github/awesome-copilot/python-pypi-package-builder for this migration.
+```
+
+Use shell commands only for installation or file-copy steps. Use chat messages to tell the agent which skill or companion skill to use for the actual migration work.
 
 Good use cases:
 
