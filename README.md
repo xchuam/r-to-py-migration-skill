@@ -98,7 +98,7 @@ This migration skill should be used together with [`github/awesome-copilot/pytho
 Run this in the agent chat:
 
 ```text
-$skill-installer install github/awesome-copilot/python-pypi-package-builder
+$skill-installer install https://github.com/github/awesome-copilot/tree/main/skills/python-pypi-package-builder
 ```
 
 ### Manual install from GitHub
@@ -108,7 +108,7 @@ Run this in your shell:
 ```bash
 git clone https://github.com/github/awesome-copilot.git /tmp/awesome-copilot
 mkdir -p ~/.agents/skills
-cp -R /tmp/awesome-copilot/python-pypi-package-builder ~/.agents/skills/
+cp -R /tmp/awesome-copilot/skills/python-pypi-package-builder ~/.agents/skills/
 ```
 
 After installation, invoke both skills together from chat:
