@@ -1,0 +1,15 @@
+# Local container/dev setup
+.devcontainer/
+
+# Local Python environment for working on the scaffold script
+.venv/
+
+# Python cache from the skill's helper script
+__pycache__/
+.pytest_cache/
+
+# Editor and OS noise
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
