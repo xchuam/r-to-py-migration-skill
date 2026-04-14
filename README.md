@@ -38,7 +38,7 @@ This skill expects these artifacts as first-class migration evidence:
 - `FUNCTION_CONTRACT.csv` for public function names, parameter names, order, and effective defaults
 - `PARITY_CASES.csv` and `PARAMETER_CASE_LINKS.csv` for parameter-by-parameter case coverage
 - generated parameter coverage reports so every public parameter is explicitly exercised
-- a version-scoped manual validation notebook with R reference output, Python output, comparison output, and plot review where applicable
+- a version-scoped manual validation Jupyter notebook such as `migration_artifacts/notebooks/manual_validation_<r_version>.ipynb`, with R reference output, Python output, comparison output, and plot review where applicable
 - promotion-readiness and deviation artifacts before merge to `main`
 
 ## Install The Skill
@@ -147,7 +147,7 @@ Good use cases:
 - building audit artifacts such as `R_PACKAGE_DOSSIER.md`, `EXPORTED_API.csv`, and `FUNCTION_CONTRACT.csv`
 - classifying modules into rewrite, faithful port, or parity bridge
 - translating testthat coverage into pytest parity coverage
-- generating parameter coverage reports and manual validation notebooks
+- generating parameter coverage reports and manual validation Jupyter notebooks
 - scaffolding the Python package, parity fixtures, and promotion/release checklists
 
 Poor use cases:
