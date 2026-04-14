@@ -41,6 +41,16 @@ Capture enough metadata to explain:
 - categorical levels
 - attribute preservation
 
+For plotting functions, capture enough evidence to compare:
+
+- axis labels and units
+- axis ranges
+- legend position and style
+- facet layout
+- group and panel ordering
+- color assignment
+- annotation placement
+
 ## High-risk signals
 
 Prefer extra fixture coverage when the source package uses:
@@ -50,6 +60,7 @@ Prefer extra fixture coverage when the source package uses:
 - `UseMethod`, S3 dispatch, S4 classes, or R6 objects
 - `attr`, `structure`, or class-tagged return values
 - compiled code in `src/`
+- plotting helpers that combine statistical summaries with rendering defaults
 
 ## Suggested test prompts
 

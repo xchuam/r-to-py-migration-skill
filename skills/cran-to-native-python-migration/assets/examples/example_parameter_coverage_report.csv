@@ -1,0 +1,6 @@
+r_function,python_function,parameter_name,parameter_position,required_case_count,covered_case_ids,side_effect_contract,status,gap_notes
+summary,summary,data,1,1,summary__defaults;summary__param__data,"row order and grouping behavior",covered,
+summary,summary,groups,2,1,summary__param__groups,"group ordering and warning behavior",covered,
+plot_summary,plot_summary,width,1,1,plot_summary__param__width;plot_summary__plot__non_default,"figure sizing and saved width",covered,
+plot_summary,plot_summary,height,2,1,plot_summary__param__height;plot_summary__plot__non_default,"figure sizing and saved height",covered,
+plot_summary,plot_summary,save_path,3,1,,"save-path side effects",missing_explicit_case,No explicit parity case linked to this public parameter

@@ -2,7 +2,9 @@
 
 A reusable agent skill for migrating a general R CRAN package into a real Python package without losing behavioral fidelity.
 
-This repository is for structured migration work, not blind syntax conversion. The skill treats the R package as the specification, freezes the reference surface before implementation, and enforces three parity constraints throughout the migration:
+This repository is for structured migration work, not blind syntax conversion. The skill treats the R package as the specification, freezes the reference surface before implementation, and enforces strict reusable parity discipline through machine-readable function contracts, parameter coverage, live R comparisons, reviewer notebooks, and explicit deviation tracking.
+
+The skill enforces three parity constraints throughout the migration:
 
 - API parity
 - test parity
@@ -28,6 +30,16 @@ For each module or subsystem, the skill requires an explicit migration mode:
 - `temporary parity bridge`
 
 That distinction is core to the repo. The skill is designed to prevent silent semantic drift in areas like missing values, factors, integer-vs-float preservation, vector recycling, indexing, attributes, formulas, and compiled code.
+
+## Strict Parity Artifacts
+
+This skill expects these artifacts as first-class migration evidence:
+
+- `FUNCTION_CONTRACT.csv` for public function names, parameter names, order, and effective defaults
+- `PARITY_CASES.csv` and `PARAMETER_CASE_LINKS.csv` for parameter-by-parameter case coverage
+- generated parameter coverage reports so every public parameter is explicitly exercised
+- a version-scoped manual validation notebook with R reference output, Python output, comparison output, and plot review where applicable
+- promotion-readiness and deviation artifacts before merge to `main`
 
 ## Install The Skill
 
@@ -132,10 +144,11 @@ Use shell commands only for installation or file-copy steps. Use chat messages t
 Good use cases:
 
 - freezing the exported R reference surface before any implementation
-- building audit artifacts such as `R_PACKAGE_DOSSIER.md` and `EXPORTED_API.csv`
+- building audit artifacts such as `R_PACKAGE_DOSSIER.md`, `EXPORTED_API.csv`, and `FUNCTION_CONTRACT.csv`
 - classifying modules into rewrite, faithful port, or parity bridge
 - translating testthat coverage into pytest parity coverage
-- scaffolding the Python package, parity fixtures, and release checklist
+- generating parameter coverage reports and manual validation notebooks
+- scaffolding the Python package, parity fixtures, and promotion/release checklists
 
 Poor use cases:
 

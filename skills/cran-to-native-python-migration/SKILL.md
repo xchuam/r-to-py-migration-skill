@@ -28,6 +28,10 @@ Do not use this skill for blind syntax conversion, code golf, or superficial "R 
 - Never claim parity without pytest coverage, fixtures, or both.
 - Never ignore packaged data, examples, tests, or compiled code in the audit.
 - Never silently change missing-value, categorical, recycling, indexing, attribute, or formula semantics.
+- Never change public function naming, parameter naming, parameter order, or effective defaults without an explicit deviation entry.
+- Never leave a public parameter without at least one explicit parity case.
+- Never treat warnings, grouping behavior, output ordering, save paths, sizing options, or plot layout behavior as out-of-scope.
+- Never promote a migration branch without a reviewer-facing manual validation notebook and parameter coverage report.
 
 ## Companion skill
 
@@ -65,6 +69,17 @@ If any of these are absent, record that explicitly instead of assuming they are 
 
 If the user asks for implementation immediately, still freeze the reference surface first unless they explicitly override that workflow.
 
+Before implementation planning, freeze the public function contract in a machine-readable form. At minimum, capture:
+
+- exact exported R function name
+- intended Python public function name
+- parameter names
+- parameter order
+- documented defaults
+- effective defaults after wrapper behavior
+- output kind
+- parameter-side effects and behavioral notes
+
 ## Stage workflow
 
 Follow the staged workflow below unless the user explicitly redirects it.
@@ -93,8 +108,12 @@ When artifacts are missing, create them in a structured and reusable format. Whe
 Read these references as needed:
 
 - Artifact definitions and required sections: `references/artifact_contracts.md`
+- Function contract and parameter parity rules: `references/function_parity.md`
 - Migration-mode rules: `references/migration_modes.md`
 - Semantic and fixture rules: `references/semantic_parity.md`
+- Manual validation notebook and live parity review rules: `references/manual_validation.md`
+- Branch model and promotion policy: `references/branch_policy.md`
+- Full migration cycle and example commands: `references/full_migration_cycle.md`
 - Common failure modes and review prompts: `references/failure_modes.md`
 - Stage gates and execution order: `references/workflow.md`
 
@@ -112,11 +131,12 @@ Required outputs usually include:
 
 - `R_PACKAGE_DOSSIER.md`
 - `EXPORTED_API.csv`
+- `FUNCTION_CONTRACT.csv`
 - `DEPENDENCY_MAP.md`
 - `DATA_ASSET_INVENTORY.md`
 - `COMPILED_CODE_INVENTORY.md`
 
-Do not advance if exported API, tests, packaged data, or compiled code coverage is still unclear.
+Do not advance if exported API, tests, packaged data, compiled code coverage, or public parameter contracts are still unclear.
 
 ### Stage 2: Migration classification
 
@@ -124,6 +144,7 @@ Required outputs usually include:
 
 - `MIGRATION_MODE_MAP.md`
 - `PARITY_PRIORITY_MATRIX.md`
+- `MIGRATION_BRANCH_POLICY.md`
 
 Every module or subsystem must have a mode and reason. Do not collapse `faithful port` into `native rewrite`.
 
@@ -138,6 +159,11 @@ The target must be a real Python package. Prefer:
 
 Always use `github/awesome-copilot/python-pypi-package-builder` together with this skill for this stage when that companion skill is available.
 
+Keep migration evidence separate from promotion-ready package artifacts. Prefer:
+
+- `migration_artifacts/` for fixtures, notebooks, reference outputs, and parity reports
+- `promotion_artifacts/` for reviewer-facing promotion bundles and merge-ready summaries
+
 ### Stage 4: Semantic normalization and fixture capture
 
 Make the data model explicit before implementation. Cover at least:
@@ -151,15 +177,38 @@ Make the data model explicit before implementation. Cover at least:
 - missing-value handling
 - matrix orientation and shapes
 
+Required outputs usually include:
+
+- `PARITY_CASES.csv`
+- `PARAMETER_CASE_LINKS.csv`
+- `FIXTURE_CATALOG.md`
+- `EDGE_CASE_MATRIX.md`
+
+For plotting functions, include both default and non-default parity cases and capture render references from live R output.
+
 ### Stage 5: Interface and test parity
 
 Freeze Python stubs and pytest parity tests before full implementation.
+
+Required outputs usually include:
+
+- `FUNCTION_PARAMETER_REVIEW_CHECKLIST.md`
+- machine-readable parameter coverage report
+- version-scoped manual validation notebook under `migration_artifacts/notebooks/`
+
+Every public parameter must be linked to at least one explicit parity case. Treat uncovered parameters as blockers.
 
 ### Stage 6: Implementation
 
 Implement module by module according to the migration mode map. If behavior changes, update `DEVIATION_LOG.md` and `PARITY_REPORT.md`.
 
 For packaging-facing implementation work, continue using `github/awesome-copilot/python-pypi-package-builder` alongside this skill.
+
+Result parity is broader than return values alone:
+
+- compare row counts, column order, values, metadata fields, and ordering assumptions for structured outputs
+- compare warnings and side effects where they are public behavior
+- compare plot units, labels, ranges, facets, legends, colors, annotation placement, and panel ordering for figures
 
 ### Stage 7: Docs sync
 
@@ -171,6 +220,8 @@ Verify build, install, test, metadata, license handling, CI, and wheel or sdist 
 
 Always use `github/awesome-copilot/python-pypi-package-builder` together with this skill for release-readiness work when available.
 
+Do not merge directly from a migration branch to `main`. Follow the branch policy and promotion gates in `references/branch_policy.md`.
+
 ## Operating heuristics
 
 - Prefer `native rewrite` when the public behavior can be preserved with clearer Python internals.
@@ -179,6 +230,8 @@ Always use `github/awesome-copilot/python-pypi-package-builder` together with th
 - Audit compiled code separately. Do not assume pure Python is acceptable for performance-critical paths.
 - Convert testthat intent into pytest intent, not just syntax.
 - Use deterministic tables, decision logs, and checklists over vague prose.
+- Treat automated checks as first-class evidence and manual notebook review as required secondary evidence.
+- If parity cannot be exact, require explicit deviation documentation, a focused test that encodes the expected difference, and reviewer-facing mention in migration notes.
 
 ## Response style for migration work
 
