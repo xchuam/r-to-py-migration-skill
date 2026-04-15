@@ -1,5 +1,9 @@
 # R Package to Python Package Migration Skill
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Skills](https://img.shields.io/badge/skills.sh-Compatible-green)](https://skills.sh)
+[![GitHub stars](https://img.shields.io/github/stars/xchuam/r-to-py-migration-skill?style=social)](https://github.com/xchuam/r-to-py-migration-skill)
+
 A reusable agent skill for migrating a general R CRAN package into a real Python package without losing behavioral fidelity.
 
 This repository is for structured migration work, not blind syntax conversion. The skill treats the R package as the specification, freezes the reference surface before implementation, and enforces strict reusable parity discipline through machine-readable function contracts, parameter coverage, live R comparisons, reviewer notebooks, and explicit deviation tracking.
@@ -43,90 +47,22 @@ This skill expects these artifacts as first-class migration evidence:
 
 ## Install The Skill
 
-### Codex / OpenAI agents
-
-Option 1: install from chat with the Codex skill installer.
-
-Run this in the agent chat, not in your shell:
-
-```text
-$skill-installer install https://github.com/xchuam/r-to-py-migration-skill/tree/main/skills/cran-to-native-python-migration
-```
-
-Option 2: install manually from the shell as a personal skill.
-
-Run this in your shell, not in chat:
-
-```bash
-mkdir -p ~/.agents/skills
-cp -R skills/cran-to-native-python-migration ~/.agents/skills/
-```
-
-Then restart Codex so the new skill is discovered.
-
-### Claude
-
-Option 1: install locally with shell commands.
+Recommended: install through the `skills.sh` ecosystem.
 
 Run this in your shell:
 
 ```bash
-mkdir -p ~/.claude/skills
-cp -R skills/cran-to-native-python-migration ~/.claude/skills/
+npx skills add xchuam/r-to-py-migration-skill
 ```
-
-Option 2: use Claude's upload flow.
-
-Do this in the Claude UI, not in the shell:
-
-- zip the `skills/cran-to-native-python-migration` folder
-- upload that folder as a skill
-- then invoke the skill from the Claude chat
-
-### GitHub Copilot / compatible agents
-
-For a repository-scoped skill, run this in your shell:
-
-```bash
-mkdir -p .github/skills
-cp -R skills/cran-to-native-python-migration .github/skills/
-```
-
-For a personal installation, run this in your shell:
-
-```bash
-mkdir -p ~/.copilot/skills
-cp -R skills/cran-to-native-python-migration ~/.copilot/skills/
-```
-
-GitHub's agent-skill docs also recognize `.claude/skills` and `.agents/skills` as supported locations in some contexts, so this same folder can be reused across ecosystems.
 
 ## Install The Required Companion Skill
 
 This migration skill should be used together with [`github/awesome-copilot/python-pypi-package-builder`](https://github.com/github/awesome-copilot/blob/main/skills/python-pypi-package-builder/SKILL.md) for Python package scaffolding, packaging metadata, and release-readiness work.
 
-### Codex / OpenAI agents
-
-Run this in the agent chat:
-
-```text
-$skill-installer install https://github.com/github/awesome-copilot/tree/main/skills/python-pypi-package-builder
-```
-
-### Manual install from GitHub
-
 Run this in your shell:
 
 ```bash
-git clone https://github.com/github/awesome-copilot.git /tmp/awesome-copilot
-mkdir -p ~/.agents/skills
-cp -R /tmp/awesome-copilot/skills/python-pypi-package-builder ~/.agents/skills/
-```
-
-After installation, invoke both skills together from chat:
-
-```text
-Use cran-to-native-python-migration and github/awesome-copilot/python-pypi-package-builder for this migration.
+npx skills add github/awesome-copilot --skill python-pypi-package-builder
 ```
 
 ## Use The Skill
