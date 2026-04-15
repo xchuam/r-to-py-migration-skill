@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SKILL_DIR="${SCRIPT_DIR}/skills/cran-to-native-python-migration"
+SKILL_DIR="${SCRIPT_DIR}/skills/r-to-py-migration-skill"
 
 usage() {
   cat <<'EOF'
@@ -38,7 +38,7 @@ install_skill() {
 
   case "${target}" in
     codex)
-      dest_dir="${HOME}/.agents/skills"
+      dest_dir="${HOME}/.codex/skills"
       ;;
     claude)
       dest_dir="${HOME}/.claude/skills"
@@ -54,9 +54,9 @@ install_skill() {
   esac
 
   mkdir -p "${dest_dir}"
-  rm -rf "${dest_dir}/cran-to-native-python-migration"
+  rm -rf "${dest_dir}/r-to-py-migration-skill"
   cp -R "${SKILL_DIR}" "${dest_dir}/"
-  echo "Installed to ${dest_dir}/cran-to-native-python-migration"
+  echo "Installed to ${dest_dir}/r-to-py-migration-skill"
 }
 
 run_scaffold() {

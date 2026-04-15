@@ -47,7 +47,33 @@ This skill expects these artifacts as first-class migration evidence:
 
 ## Install The Skill
 
-Recommended: install through the `skills.sh` ecosystem.
+Recommended: install with the method that matches your agent directly. This is more stable than relying on the shared skills ecosystem alone.
+
+### Codex
+
+Run this in the agent chat:
+
+```text
+$skill-installer install https://github.com/xchuam/r-to-py-migration-skill/tree/main/skills/r-to-py-migration-skill
+```
+
+Or run this in your shell:
+
+```bash
+./skill.sh install codex
+```
+
+### Claude
+
+Run this in your shell:
+
+```bash
+./skill.sh install claude
+```
+
+### skills.sh ecosystem
+
+This skill also works with the broader `skills.sh` ecosystem.
 
 Run this in your shell:
 
@@ -55,15 +81,39 @@ Run this in your shell:
 npx skills add xchuam/r-to-py-migration-skill
 ```
 
+After ecosystem install, check inside your agent that `r-to-py-migration-skill` is actually available before relying on it.
+
 ## Install The Required Companion Skill
 
 This migration skill should be used together with [`github/awesome-copilot/python-pypi-package-builder`](https://github.com/github/awesome-copilot/blob/main/skills/python-pypi-package-builder/SKILL.md) for Python package scaffolding, packaging metadata, and release-readiness work.
+
+### Codex
+
+Run this in the agent chat:
+
+```text
+$skill-installer install https://github.com/github/awesome-copilot/tree/main/skills/python-pypi-package-builder
+```
+
+### Claude
+
+Run this in your shell:
+
+```bash
+git clone https://github.com/github/awesome-copilot.git /tmp/awesome-copilot
+mkdir -p ~/.claude/skills
+cp -R /tmp/awesome-copilot/skills/python-pypi-package-builder ~/.claude/skills/
+```
+
+### skills.sh ecosystem
 
 Run this in your shell:
 
 ```bash
 npx skills add github/awesome-copilot --skill python-pypi-package-builder
 ```
+
+After ecosystem install, confirm inside the agent that `python-pypi-package-builder` is available.
 
 ## Use The Skill
 
@@ -72,7 +122,7 @@ Once installed, invoke the skill from the agent chat.
 Type something like this in chat:
 
 ```text
-Use cran-to-native-python-migration and github/awesome-copilot/python-pypi-package-builder for this migration.
+Use r-to-py-migration-skill and github/awesome-copilot/python-pypi-package-builder for this migration.
 ```
 
 Use shell commands only for installation or file-copy steps. Use chat messages to tell the agent which skill or companion skill to use for the actual migration work.

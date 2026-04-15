@@ -1,6 +1,6 @@
 ---
-name: cran-to-native-python-migration
-description: Use when migrating a general CRAN package into a native Python package and the work must preserve API parity, test parity, and data-model parity through a staged workflow. Enforces reference freeze, per-module migration classification into native rewrite or faithful port or temporary parity bridge, semantic audit, fixture capture, Python package scaffolding, parity testing, documented deviations, and release readiness.
+name: r-to-py-migration-skill
+description: Use when migrating an R or CRAN package to Python. Audits the R package first, preserves API, test, and data-model behavior, and produces a real Python package with parity checks and documented deviations.
 license: MIT
 ---
 

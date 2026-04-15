@@ -1,5 +1,5 @@
-display_name: CRAN to Native Python Migration
-short_description: Migrate a general CRAN package into a real Python package with strict function-contract parity, parameter coverage, notebook review, and documented deviations.
+display_name: R Package to Python Package Migration
+short_description: Migrate an R or CRAN package to Python with parity checks, reviewer notebook support, and documented deviations.
 default_prompt: >-
   Migrate this CRAN package into a native Python package by freezing the R
   reference surface first, classifying each subsystem into native rewrite or
