@@ -60,7 +60,9 @@ $skill-installer install https://github.com/xchuam/r-to-py-migration-skill/tree/
 Or run this in your shell:
 
 ```bash
-./skill.sh install codex
+git clone https://github.com/xchuam/r-to-py-migration-skill.git /tmp/r-to-py-migration-skill
+cd /tmp/r-to-py-migration-skill
+bash ./skill.sh install codex
 ```
 
 ### Claude
@@ -68,7 +70,9 @@ Or run this in your shell:
 Run this in your shell:
 
 ```bash
-./skill.sh install claude
+git clone https://github.com/xchuam/r-to-py-migration-skill.git /tmp/r-to-py-migration-skill
+cd /tmp/r-to-py-migration-skill
+bash ./skill.sh install claude
 ```
 
 ### skills.sh ecosystem
